@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>MEMORY PLUS</h1>
+<h2>
+	ログイン
+</h2>
+
+{if isset($message)}<p class="error">{$message}</p>{/if}
+
+<form action="login.php" method="POST">
+	ユーザ名：
+	<input type="text" name="name" 
+		{if isset($user.name)}
+			value="{$user.name}"
+		{/if}
+		autofocus
+	/>
+	<br/><br/>
+
+	パスワード：
+	<input type="password" name="pass" 
+			{if isset($user.pass)}
+				value="{$user.pass}"
+			{/if}
+	/>
+	<br/><br/>
+
+	<input type="submit" value="ログイン"　/>
+</form>
+<br/>
+
+<form action="regist_form.php" method="post">
+	<input type="submit" value="新規登録"　/>
+</form>
+
+</body>
+</html>

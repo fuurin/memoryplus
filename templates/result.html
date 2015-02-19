@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>結果発表</h1>
+
+<h2>{$user.name}さんの[{$subject}]の問題集[{$workbook}]</h2>
+
+<h3>解答時間：{$time}</h3>
+<h3>{$sum}問中　{$ok}問　正解！ {$message}</h3>
+
+<table>
+	<caption>再挑戦</caption>
+	<th>
+		<td>
+			<button onclick = "location.href='question.php?q_no={$q_ng_first}&restart=ng'"
+				{if !isset($q_ng_first)} disabled {/if} />
+				間違えた問題
+			</button>
+		</td>
+
+		<td>
+			<button onclick = "location.href='question.php?q_no={$q_ok_first}&restart=ok'" 
+				{if !isset($q_ok_first)} disabled {/if}/>
+				正解した問題
+			</button>
+		</td>
+
+		<td>
+			<button onclick = "location.href='question.php?q_no={$q_normal_first}&restart=normal'" 
+				{if !isset($q_normal_first)} disabled {/if}/>
+				すべての問題
+			</button>
+		</td>
+	</th>
+</table><br/>
+
+<a href="select.php?subject={$subject}&workbook={$workbook}">
+	←問題選択に戻る
+</a>
+
+<br/>
+<a href="workbook.php?subject={$subject}">
+	←←問題集選択に戻る
+</a>
+
+<br/>
+<a href="menu.php">
+	←←←メニューに戻る
+</a>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>問題集選択</h1>
+
+<h2>{$user.name}さんの[{$subject}]の問題集</h2>
+
+<a href="menu.php">
+	←メニューに戻る
+</a><br/><br/>
+
+<form action="append_form.php" method="post">
+	<input type="hidden" name="subject" value="{$subject}" />
+	<input type="submit" value="問題を追加"　/>
+</form><br/>
+
+<table border="2" class="workbook">
+	<tr><th>問題集名</th><th>問題集名の編集</th><th>問題集の削除</th></tr>
+	{foreach $workbooks as $workbook}
+	<tr>
+		<td class="tl">
+			<a href="select.php?subject={$subject}&workbook={$workbook.workbook}">
+				{$workbook.workbook}
+			</a>
+		</td>
+
+		<td class="ct">
+			<form action="revise_workbook_form.php" method="get">
+				<input type="hidden" name="subject" value="{$subject}" />
+				<input type="hidden" name="workbook" value="{$workbook.workbook}" />
+				<input type="submit" value="編集"　/>
+			</form>
+		</td>
+
+		<td class="ct">
+			<form action="delete_workbook_check.php" method="get">
+				<input type="hidden" name="subject" value="{$subject}" />
+				<input type="hidden" name="workbook" value="{$workbook.workbook}" />
+				<input type="submit" value="削除"　/>
+			</form>
+		</td>
+	</tr>
+	{/foreach}
+</table>
+
+</body>
+</html>

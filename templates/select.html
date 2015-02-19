@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>問題選択</h1>
+
+<h2>{$user.name}さんの[{$subject}]の[{$workbook}]の問題</h2>
+
+<a href="workbook.php?subject={$subject}">
+	←問題集選択に戻る
+</a><br/>
+
+<a href="menu.php">
+	←←メニューに戻る
+</a><br/>
+
+<h3>検索/並べ替え</h3>
+<form action="select.php?subject={$subject}&workbook={$workbook}" method="post">
+	<p>文字列<input type="text" name="search" value="{$search}" autofocus>を含む問題</p>
+
+	<table class="sort">
+	<tr><th>優先順</th><th>基準</th></tr>
+	<tr>
+		<td class="ct">1</td>
+		<td>
+			<select name="sort_1">
+			<option value="none">選択してください</option>
+			<option value="rate" {if $sort_1=="rate"}selected{/if}>正答率</option>
+			<option value="num" {if $sort_1=="num"}selected{/if}>解答回数</option>
+			<option value="append" {if $sort_1=="append"}selected{/if}>追加順</option>
+			</select>
+		</td>
+		<td>
+			<label>
+				<input type="radio" name="up_down_1" value="up"
+				{if $up_down_1=="up"}checked{/if}>昇順
+			</label>
+		</td>
+		<td>
+			<label>
+				<input type="radio" name="up_down_1" value="down"  
+				{if $up_down_1=="down"}checked{/if}>降順
+			</label>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="ct">2</td>
+		<td>
+			<select name="sort_2">
+			<option value="none">選択してください</option>
+			<option value="rate" {if $sort_2=="rate"}selected{/if}>正答率</option>
+			<option value="num" {if $sort_2=="num"}selected{/if}>解答回数</option>
+			<option value="append" {if $sort_2=="append"}selected{/if}>追加順</option>
+			</select>
+		</td>
+		<td>
+			<label>
+				<input type="radio" name="up_down_2" value="up"
+				{if $up_down_2=="up"}checked{/if}>昇順
+			</label>
+		</td>
+		<td>
+			<label>
+				<input type="radio" name="up_down_2" value="down"  
+				{if $up_down_2=="down"}checked{/if}>降順
+			</label>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="ct">3</td>
+		<td>
+			<select name="sort_3">
+			<option value="none">選択してください</option>
+			<option value="rate" {if $sort_3=="rate"}selected{/if}>正答率</option>
+			<option value="num" {if $sort_3=="num"}selected{/if}>解答回数</option>
+			<option value="append" {if $sort_3=="append"}selected{/if}>追加順</option>
+			</select>
+		</td>
+		<td>
+			<label>
+				<input type="radio" name="up_down_3" value="up"
+				{if $up_down_3=="up"}checked{/if}>昇順
+			</label>
+		</td>
+		<td>
+			<label>
+				<input type="radio" name="up_down_3" value="down"  
+				{if $up_down_3=="down"}checked{/if}>降順
+			</label>
+		</td>
+	</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" name="random"
+					{if $random=="true"}checked{/if}>ランダム
+				</label>
+			</td>
+			<td>
+				<label>
+					<input type="checkbox" name="reverse"
+					{if $reverse=="true"}checked{/if}>問題と解答を逆にする
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" name="zero_percent"
+					{if $zero_percent=="true"}checked{/if}>正答率が0％の問題
+				</label>
+			</td>
+			<td>
+				<label>
+					<input type="checkbox" name="zero_answer"
+					{if $zero_answer=="true"}checked{/if}>解答回数が0回の問題
+				</label>
+			</td>
+		</tr>
+	</table><br/>
+	<input type="submit" name="search_sort" value="検索/並べ替え">
+</form>
+
+
+
+
+
+<h3>選択された問題</h3>
+
+<table border="2" class="question">
+	<caption>
+		<table>
+			<tr>
+				<td>
+					<form action="append_form.php" method="post">
+						<input type="hidden" name="subject" value="{$subject}" />
+						<input type="hidden" name="workbook" value="{$workbook}" />
+						<input type="submit" value="問題を追加"　/>
+					</form>
+				</td>
+
+				<td>
+					<form action="download_csv_form.php" method="get">
+						<input type="hidden" name="subject" value="{$subject}" />
+						<input type="hidden" name="workbook" value="{$workbook}" />
+						<input type="submit" value="CSVファイルダウンロード"　/>
+					</form>
+				</td>
+
+				<td>
+					<form action="reset_answer_selected_check.php" method="get">
+						<input type="hidden" name="subject" value="{$subject}" />
+						<input type="hidden" name="workbook" value="{$workbook}" />
+						<input type="submit" name="reset_selected" value="解答履歴をリセット">
+					</form>
+				</td>
+
+				<!-- <td>
+					<form action="reset_memory_selected_check.php" method="get">
+						<input type="hidden" name="subject" value="{$subject}" />
+						<input type="hidden" name="workbook" value="{$workbook}" />
+						<input type="submit" name="reset_selected" value="覚え方を削除">
+					</form>
+				</td>
+ 				-->
+
+				<td>
+					<form action="delete_selected_check.php" method="get">
+						<input type="hidden" name="subject" value="{$subject}" />
+						<input type="hidden" name="workbook" value="{$workbook}" />
+						<input type="submit" name="delete_selected" value="すべて削除">
+					</form>
+				</td>
+			</tr>
+		</table>
+		{if $select_error=="true"}<p class="error">→問題が1問も選択されていませんでした。</p>
+		{else}<br/>{/if}
+	</caption>
+
+	<tr><th>問題</th><th>問題の編集</th><th>問題の削除</th><th>正答率</th><th>解答回数</th></tr>
+	{foreach $questions as $question}
+	<tr>
+		<td class="lt">
+			<a href="question.php?q_no={$question.q_no}">
+				{nl2br(htmlspecialchars($question.question, $smarty.const.ENT_QUOTES))}{if $question.len_q == "true"}・・・{/if}
+			</a>
+		</td>
+
+		<td class="ct">
+			<form action="revise_form.php" method="get">
+				<input type="hidden" name="q_no" value="{$question.q_no}" />
+				<input type="submit" value="編集"　/>
+			</form>
+		</td>
+
+		<td class="ct">
+			<form action="delete_question.php" method="post">
+				<input type="hidden" name="q_no" value="{$question.q_no}" />
+				<input type="hidden" name="subject" value="{$subject}" />
+				<input type="hidden" name="workbook" value="{$workbook}" />
+				<input type="submit" value="削除"　/>
+			</form>
+		</td>
+
+		<td class="rt">
+			{$question.answer_rate}
+		</td>
+
+		<td class="rt">
+			{$question.answer_num}回
+		</td>
+	</tr>
+	{/foreach}
+</table>
+
+
+</body>
+</html>

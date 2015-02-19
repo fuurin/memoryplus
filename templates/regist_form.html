@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>新規登録</h1>
+
+<a href="index.php">
+	←ログイン画面に戻る
+</a><br/><br/>
+
+<form action="regist.php" method="POST">
+	ユーザ名 (1文字以上{$MAX_TEXT_NUM}文字以内)<br/>
+	<input type="text" name="name" 
+		{if isset($name) and !$identifical}
+			value="{$name}"
+		{/if} autofocus />
+	{if $name_range}<p class="error">　→ユーザ名は1文字以上{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+	{elseif $identifical}<p class="error">　→そのユーザ名は既に利用されています。別のユーザ名を入力してください。</p>
+	{else}<br/><br/>
+	{/if}
+
+	パスワード ({$MIN_PASS_NUM}文字以上{$MAX_PASS_NUM}文字以内)<br/>
+	<input type="password" name="pass" />
+	{if $pass_range}<p class="error">　→パスワードは{$MIN_PASS_NUM}文字以上{$MAX_PASS_NUM}文字以内で入力してください。</p>
+	{else}<br/><br/>{/if}
+
+	パスワード確認<br/>
+	<input type="password" name="conf" />
+	{if $match}<p class="error">　→確認パスワードと一致しません。もう一度入力してください。</p>
+	{else}<br/><br/>{/if}
+
+	<input type="submit" value="新規登録"　/>
+</form><br/><br/>
+
+</body>
+</html>

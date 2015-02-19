@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>MEMORY PLUS メニュー</h1>
+
+<h2>ようこそ{$user.name}さん！</h2>
+
+<h3>Memoryplusの使い方</h3>
+<p>Step1:問題を作る</p>
+<p>Step2:問題を解く</p>
+<p>Step3:便利機能で繰り返し練習</p>
+<p><a href="http://sozai.akuseru-design.com/">sozai.akuseru-design.com</a>←Webページの素材はここから頂きました。</p>
+
+<table>
+	<tr>
+		<td>
+			<form action="logout.php" method="post">
+				<input type="submit" value="ログアウト"　/>
+			</form>
+		</td>
+
+		<td>
+			<form action="delete_user_check.php" method="post">
+				<input type="submit" value="ユーザ情報全削除"　/>
+			</form>
+		</td>
+	</tr>
+</table>
+<h2>{$user.name}さんの教科</h2>
+
+<input type="button" onclick="location.href='append_form.php'"value="問題を追加">
+
+<input type="button" onclick="location.href='append_csv_form.php'"value="CSVファイルから問題を追加">
+<br/><br/>
+
+<table border="2" class="subject">
+	<tr><th>教科名</th><th>教科名の編集</th><th>教科の削除</th></tr>
+	{foreach $subjects as $subject}
+	<tr>
+		<td class="lt">
+			<a href="workbook.php?subject={$subject.subject}">
+				{$subject.subject}
+			</a>
+		</td>
+
+		<td class="ct">
+			<form action="revise_subject_form.php" method="get">
+				<input type="hidden" name="subject" value="{$subject.subject}" />
+				<input type="submit" value="編集"　/>
+			</form>
+		</td>
+
+		<td class="ct">
+			<form action="delete_subject_check.php" method="get">
+				<input type="hidden" name="subject" value="{$subject.subject}" />
+				<input type="submit" value="削除"　/>
+			</form>
+		</td>
+	</tr>
+	{/foreach}
+</table>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>CSVファイルから問題を追加</h1>
+
+{if isset($complete_message)}<h3>{$complete_message}</h3>{/if}
+
+{if isset($skip)}
+{foreach $skip as $num}
+		<p class="error">{$num}行目のデータは存在したので追加されませんでした。</p>
+{/foreach}
+{/if}
+
+<a href="menu.php">
+	←メニューに戻る
+</a><br/>
+
+<h3>※CSVファイルに関する注意</h3>
+<p>・最初の行に{$EXP_ROW_NUM}列の値を入力して、{$EXP_ROW_NUM}列のCSVファイルを作成してください。</p>
+<p>・最初の行は追加されません。見出しに使ってください。</p>
+<p>・｜教科名｜問題集名｜問題｜解答｜覚え方｜の順で入力してください。</p>
+<p>・｜教科名｜問題集名｜問題｜解答｜の列は、入力必須項目です。</p>
+<p>・｜教科名｜問題集名｜問題｜解答｜が全て同じ問題がすでに存在する場合は、その問題は追加されません。</p>
+<p>・｜教科名｜問題集名｜覚え方｜はそれぞれ{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+<p>・エラーメッセージは、エラーがあった最初の行に対してのみ表示されます。</p>
+
+<h3>CSVファイルから問題を追加</h3>
+<p>CSVファイルを選択</p>
+{if isset($error)}
+	{foreach $error as $msg}
+		<p class="error">　→{$msg}</p>
+	{/foreach}
+{/if}
+<form action="append_csv.php" method="POST" enctype="multipart/form-data">
+	<input type="file" name="q_csv" size="30"><br/><br/>
+	<input type="submit" value="問題追加">
+</form><br/>
+
+</body>
+</html>

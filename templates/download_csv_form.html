@@ -1,0 +1,63 @@
+	<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>CSVファイルをダウンロード</h1>
+
+<h2>{$user.name}さんの[{$subject}]の[{$workbook}]の問題</h2>
+
+<a href="select.php?subject={$subject}&workbook={$workbook}">
+	←問題選択に戻る
+</a>
+
+<br/>
+<a href="workbook.php?subject={$subject}">
+	←←問題集選択に戻る
+</a>
+
+<br/>
+<a href="menu.php">
+	←←←メニューに戻る
+</a>
+
+<h3>※CSVファイルに関する注意</h3>
+
+<p>・｜教科名｜問題集名｜問題｜解答｜覚え方｜をダウンロードします。</p>
+<p>・存在するフォルダのパスを入力してからダウンロードしてください。</p>
+<p>・1行目には見出しが入力されます。</p>
+
+<br/>
+<form action="download_csv.php" method="post">
+	<p>↓ダウンロードするフォルダの絶対パス</p>
+	<input type="text" name="path" {if isset($path)}value="{$path}"{/if}>
+	<input type="hidden" name="subject" value="{$subject}" />
+	<input type="hidden" name="workbook" value="{$workbook}" />
+	<input type="submit" name="download" value="ダウンロード">
+</form>
+{if isset($path)}<p class="error">　→存在するフォルダを入力してください。</p>
+{else}
+<br/>
+{/if}
+
+<h3>選択された問題</h3>
+
+<table border="2" class="question">
+	<tr><th>問題</th><th>解答</th><th>覚え方</th></tr>
+	{foreach $questions as $question}
+	<tr>
+		<td class="lt">
+				{nl2br(htmlspecialchars($question.question, $smarty.const.ENT_QUOTES))}{if $question.len_q == "true"}・・・{/if}
+		</td>
+
+		<td class="lt">
+				{nl2br(htmlspecialchars($question.answer, $smarty.const.ENT_QUOTES))}{if $question.len_a == "true"}・・・{/if}
+		</td>
+
+		<td class="lt">
+				{nl2br(htmlspecialchars($question.memory, $smarty.const.ENT_QUOTES))}{if $question.len_m == "true"}・・・{/if}
+		</td>
+	</tr>
+	{/foreach}
+</table><br/>
+
+</body>

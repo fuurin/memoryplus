@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>教科編集</h1>
+
+<h2>教科[{$subject}]の編集</h2>
+
+{if $revise_complete=="true"}<h3>教科名を[{$subject}]に編集しました。</h3>{/if}
+{if $exists_complete=="true"}<h3>[{$subject}]への統合が完了しました。</h3>{/if}
+{if $reset_complete=="true"}<h3>[{$subject}]の全問題のリセットが完了しました。</h3>{/if}
+
+<h3>教科名を編集</h3>
+<form action="revise_subject.php?subject={$subject}" method="post">
+	<p>新しい教科名</p>
+	{if $subject_error=="true"}<p class="error">　→教科名を入力してください。</p>
+	{elseif $subject_long_error=="true"}<p class="error">　→教科名は{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+	{elseif $subject_same_error=="true"}<p class="error">　→教科名が変更されていません。</p>
+	{elseif $subject_exists_error=="true"}<p class="error">　→教科[{$error_subject}]は既に存在します。統合する場合は、下のプルダウンメニューから選んでください。</p>
+	{else}<br/>{/if}
+	{nl2br(htmlspecialchars($subject, $smarty.const.ENT_QUOTES))}→
+	<input type="text" name="new_subject" size="30" value="{$subject}" />
+	<br/><br/>
+	<input type="submit" name="revise" value="編集"　/>
+</form>
+
+
+<h3>すでに存在する他の教科に統合する</h3>
+<form action="revise_subject_exists.php?subject={$subject}" method="post">
+	<p>統合先の教科を選択</p>
+	<select name="marge_list">
+		<option value="none"　selected>選択してください。</option>
+		{foreach $subjects as $one_subject}
+			<option value="{$one_subject.subject}">{$one_subject.subject}</option>
+		{/foreach}
+	</select>
+	{if $subject_select_error=="true"}<p class="error">　→教科を選択してください。</p>
+	{else}<br/><br/>{/if}
+	<input type="submit" name="marge" value="統合"　/>
+</form>
+
+
+<h3>正答率、解答回数のリセット</h3>
+<form action="revise_subject_reset.php?subject={$subject}" method="post">
+	<h4>
+		<label>
+			<input type="checkbox" name="reset_check">
+			この教科のすべての問題の正答率と解答回数をリセット
+		</label>
+	</h4>
+	<input type="submit" name="reset" value="リセット"　/>
+</form>
+
+<br/>
+<a href="menu.php">
+	←メニューに戻る
+</a>
+
+
+</body>
+</html>

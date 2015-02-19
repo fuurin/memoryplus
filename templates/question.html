@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>第{$q_count}問/全{$q_sum}問</h1>
+<h2>
+	{$user.name}さんの[{$question.subject}]の[{$question.workbook}]の問題
+</h2>
+
+<p>{nl2br(htmlspecialchars($question.question, $smarty.const.ENT_QUOTES))}</p>
+
+<h3>正答率：{$answer_rate}/解答回数：{$answer_num}回</h3>
+<br/>
+
+
+<form action="answer_form.php?q_no={$question.q_no}" method="POST">
+	解答 <br/>
+	<textarea name="user_answer" cols="60" rows="8" autofocus></textarea><br/>
+	<br/>
+	<input type="submit" name="answer" value="答えを見る"　/>
+</form><br/>
+
+<form action="question.php?q_no={$question.q_no}" method="POST">
+	<input type="submit" {if isset($memory)}name="memory_close" value="覚え方を閉じる"
+	　{else}name="memory" value="覚え方を見る" {/if}/>
+</form>
+
+{if isset($memory)}
+	<h3>覚え方</h3>
+	<p>{nl2br(htmlspecialchars($question.memory, $smarty.const.ENT_QUOTES))}</p>
+{else}
+	<br/>
+{/if}
+
+<a href="count_answer.php?subject={$question.subject}&workbook={$question.workbook}&finish=1">
+	解答を中断して結果を見る
+</a>
+
+<br/>
+<a href="count_answer.php?subject={$question.subject}&workbook={$question.workbook}">
+	←問題選択に戻る
+</a>
+
+
+</body>
+</html>

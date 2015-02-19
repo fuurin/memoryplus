@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>問題集削除確認</h1>
+<h4>教科　[{$subject}] の問題集　[{$workbook}]　の問題を全て削除しますか？</h4>
+
+<form action="delete_workbook.php" method="post">
+	<input type="hidden" name="subject" value="{$subject}" />
+	<input type="hidden" name="workbook" value="{$workbook}" />
+	<input type="submit" value="削除"　/>
+</form>
+
+<br/>
+<a href="workbook.php?subject={$subject}">
+	←問題集選択に戻る
+</a>
+
+<br/>
+<a href="menu.php">
+	←←メニューに戻る
+</a>
+
+</body>
+</html>

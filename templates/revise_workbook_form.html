@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>問題集編集</h1>
+
+<h2>教科[{$subject}]の問題集[{$workbook}]の編集</h2>
+
+{if $revise_complete=="true"}<h3>問題集名を[{$workbook}]に編集しました。</h3>{/if}
+{if $exists_complete=="true"}<h3>[{$workbook}]への統合が完了しました。</h3>{/if}
+{if $reset_complete=="true"}<h3>[{$workbook}]の全問題のリセットが完了しました。</h3>{/if}
+
+<h3>問題集名を編集</h3>
+<form action="revise_workbook.php?subject={$subject}&workbook={$workbook}" method="post">
+	新しい問題集名<br/>
+	{if $workbook_error=="true"}<p class="error">　→問題集名を入力してください。</p>
+	{elseif $workbook_long_error=="true"}<p class="error">　→問題集名は{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+	{elseif $workbook_same_error=="true"}<p class="error">　→問題集名が変更されていません。</p>
+	{elseif $workbook_exists_error=="true"}<p class="error">　→問題集[{$error_workbook}]は既に存在します。統合する場合は、下のプルダウンメニューから選んでください。</p>
+	{else}<br/>{/if}
+	{nl2br(htmlspecialchars($workbook, $smarty.const.ENT_QUOTES))}→
+	<input type="text" name="new_workbook" size="30" value="{$workbook}" />
+	<br/><br/>
+	<input type="submit" name="revise" value="編集"　/>
+</form>
+
+
+<h3>すでに存在する他の問題集に統合する</h3>
+<form action="revise_workbook_exists.php?subject={$subject}&workbook={$workbook}" method="post">
+	<p>統合先の問題集を選択</p>
+	<select name="marge_list">
+		<option value="none"　selected>選択してください。</option>
+		{foreach $workbooks as $one_workbook}
+			<option value="{$one_workbook.workbook}">{$one_workbook.workbook}</option>
+		{/foreach}
+	</select>
+	{if $workbook_select_error=="true"}<p class="error">　→問題集を選択してください。</p>
+	{else}<br/><br/>{/if}
+	<input type="submit" name="marge" value="統合"　/>
+</form>
+
+
+<h3>正答率、解答回数のリセット</h3>
+<form action="revise_workbook_reset.php?subject={$subject}&workbook={$workbook}" method="post">
+	<h4>
+		<label>
+			<input type="checkbox" name="reset_check">
+			この問題集のすべての問題の正答率と解答回数をリセット
+		</label>
+	</h4>
+	<input type="submit" name="reset" value="リセット"　/>
+</form>
+
+<br/>
+<a href="workbook.php?subject={$subject}">
+	←問題集選択に戻る
+</a>
+
+<br/>
+<a href="menu.php">
+	←←メニューに戻る
+</a>
+
+
+</body>
+</html>

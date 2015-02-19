@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>CSVファイルダウンロード完了</h1>
+<h2>{$file_name}をダウンロードしました。</h2>
+<h3>フォルダを開く</h3>
+<p>以下のURLを検索フォームに張り付けて移動すると、ダウンロードしたフォルダのページに移ります。</p>
+<p>{$path}</p><br/>
+
+<a href="select.php?subject={$subject}&workbook={$workbook}">
+	←問題選択に戻る
+</a>
+
+<br/>
+<a href="workbook.php?subject={$subject}">
+	←←問題集選択に戻る
+</a>
+
+<br/>
+<a href="menu.php">
+	←←←メニューに戻る
+</a>
+
+</body>
+</html>

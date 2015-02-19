@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>第{$q_count}問/全{$q_sum}問の解答</h1>
+<h2>
+	{$user.name}さんの[{$question.subject}]の[{$question.workbook}]の問題
+</h2>
+<p>{$question.question}</p>
+
+<h3>模範解答</h3>
+<p>{nl2br(htmlspecialchars($question.answer, $smarty.const.ENT_QUOTES))}</p>
+
+<h3>{$user.name}さんの解答</h3>
+<p class="match">{nl2br(htmlspecialchars($str_mached, $smarty.const.ENT_QUOTES))}</p>
+<p class="unmatch">{nl2br(htmlspecialchars($str_unmached, $smarty.const.ENT_QUOTES))}</p>
+<br/><br/>
+
+<button onclick = "location.href='answer.php?q_no={$question.q_no}&judge=true'">
+正解
+</button>
+
+<button onclick = "location.href='answer.php?q_no={$question.q_no}&judge=false'">
+不正解
+</button><br/><br/>
+
+<form action="revise_form.php" method="GET">
+	<input type="hidden" name="q_no", value="{$question.q_no}">
+	<input type="hidden" name="answering", value="1">
+	<input type="submit" value="修正する"　/>
+</form>
+
+
+<h3>{$user.name}さんの覚え方</h3>
+{if $question.memory==""}
+<p>覚え方が登録されていません。</p>
+{else}
+<p>{nl2br(htmlspecialchars($question.memory, $smarty.const.ENT_QUOTES))}</p>
+{/if}
+
+↓<br/><br/>
+
+<form action="answer_form.php?q_no={$question.q_no}" method="post">
+	<input type="hidden" name="user_answer", value="{$user_answer}">
+	<textarea name="user_memory" cols="35" rows="3">{$question.memory}</textarea><br/>
+	{if isset($memory_error)}
+	<p class="error">　→覚え方は{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+	{/if}
+	<input type="submit" name="memory" 
+		{if $question.memory==""}value="覚え方を登録する"
+		{else}value="覚え方を編集する"　{/if}/>
+</form>
+
+<br/>
+<a href="count_answer.php?subject={$question.subject}&workbook={$question.workbook}&finish=1">
+	解答を中断して結果を見る
+</a>
+
+<br/>
+<a href="count_answer.php?subject={$question.subject}&workbook={$question.workbook}">
+	←問題選択に戻る
+</a>
+
+</body>
+</html>

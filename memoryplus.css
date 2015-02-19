@@ -1,0 +1,121 @@
+body
+{
+	margin:20px 15%;
+	background-image: url("image/bg008_05.gif");
+}
+
+h1
+{
+	border-bottom:solid 2px cornflowerblue;
+	border-left:solid 10px cornflowerblue;
+	background: url("image/pencil.jpg") no-repeat left center;
+	padding:3px 0px 3px 10px ;
+	font-size:2em;
+	color:#003f8e;
+}
+
+h2
+{
+	color:whitesmoke;
+	font-size:1.5em;
+	padding: 2px 0px 2px 2px;
+	background-image: url("image/head003_02.gif");
+}
+
+h3
+{
+	font-family:'Lucida Grande',
+	 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
+	 Meiryo, メイリオ, sans-serif;
+	 background-repeat: no-repeat;
+	background-image: url("image/head010_02.gif");
+	padding:0px 0px 0px 20px;
+	color:#464c47;
+}
+
+p
+{
+	font-family:'Lucida Grande',
+	 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
+	 Meiryo, メイリオ, sans-serif;
+}
+
+p.error
+{
+	color:red;
+	font: bolder;
+}
+
+p.match
+{
+	color: red;
+	display: inline;
+}
+
+p.unmatch
+{
+	display: inline;
+}
+
+h3.left
+{
+	float: left;
+}
+
+h4
+{
+	color:red;
+}
+
+div.right
+{
+	float: right;
+}
+
+div.left
+{
+	float: left;
+}
+
+table
+{
+
+}
+
+table.subject
+{
+	background-color:#f7f6fb;
+}
+
+table.workbook
+{
+	background-color:#f7f6fb;
+}
+
+table.question
+{
+	background-color:#f7f6fb;
+}
+
+th
+{
+}
+
+td
+{
+}
+td.ct
+{
+	text-align:center;
+	vertical-align: middle;
+}
+td.rt
+{
+	text-align:right;
+	vertical-align: middle;
+}
+td.lt
+{
+	text-align:left;
+	vertical-align: middle;
+}

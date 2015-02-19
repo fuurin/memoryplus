@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+{include file='header.html'}
+<body>
+<h1>問題追加</h1>
+
+{if isset($count)}<h3>[{$subject}]の[{$workbook}]に {$count} 問目の問題を追加しました。</h3>{/if}
+
+{if $subject!="" && $workbook!="" && !isset($error)}
+	<a href="select.php?subject={$subject}&workbook={$workbook}">
+		←問題選択に戻る
+	</a><br/>
+	<a href="workbook.php?subject={$subject}">
+		←←問題集選択に戻る
+	</a><br/>
+	<a href="menu.php">
+		←←←メニューに戻る
+	</a><br/>
+
+{else if $subject!="" && !isset($error)}
+	<a href="workbook.php?subject={$subject}">
+		←問題集選択に戻る
+	</a><br/>
+	<a href="menu.php">
+		←←メニューに戻る
+	</a><br/>
+
+{else}
+	<a href="menu.php">
+		←メニューに戻る
+	</a><br/>
+	
+{/if}
+
+<h4>※注：*がついているものは必須項目です。</h4>
+<form action="append.php" method="post">
+	問題*{if isset($question_error)}<p class="error">　→問題を入力してください。</p>{else}<br/>{/if}
+	<textarea name="question" cols="60" rows="8" autofocus>{if isset($question)}{$question}{/if}</textarea><br/><br/>
+
+	解答*{if isset($answer_error)}<p class="error">　→解答を入力してください。</p>{else}<br/>{/if}
+	<textarea name="answer" cols="60" rows="8">{if isset($answer)}{$answer}{/if}</textarea><br/><br/>
+
+	覚え方{if isset($memory_long_error)}<p class="error">　→覚え方は{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+		{else}<br/>{/if}
+	<textarea name="memory" cols="35" rows="3">{if isset($memory)}{$memory}{/if}</textarea><br/><br/>
+
+	教科名*{if isset($subject_error)}<p class="error">　→教科名を入力してください。</p>
+		{else if isset($subject_long_error)}<p class="error">　→教科名は{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+		{else}<br/>{/if}
+	<input type="text" name="subject" size="30" value="{$subject}" /><br/><br/>
+
+	問題集名*{if isset($workbook_error)}<p class="error">　→問題集名を入力してください。</p>
+		{else if isset($workbook_long_error)}<p class="error">　→問題集名は{$MAX_TEXT_NUM}文字以内で入力してください。</p>
+		{else}<br/>{/if}	
+	<input type="text" name="workbook" size="30" value="{$workbook}" /><br/><br/>
+
+	<input type="submit" value="問題追加"　/>
+</form><br/>
+
+</body>
+</html>
