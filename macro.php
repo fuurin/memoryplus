@@ -24,7 +24,7 @@
 
 	//データベース情報
 	$dbname='phpdb';		//DB名	
-	$host='127.0.0.1';		//DBのIPアドレス
+	$host='php.ci5vjjwa5osw.ap-northeast-1.rds.amazonaws.com';		//DBのIPアドレス
 	$hostname='root';		//DBユーザネーム
 	$password='E0M6g2b4r';	//DBパスワード
 
