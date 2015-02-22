@@ -18,7 +18,7 @@
 
 	//テンプレート利用準備
 	//smartyクラスの読み込み
-	require_once $SMARTY_PATH;
+	require_once "smarty/Smarty.class.php";
 	
 	//smartyのインスタンスを作成
 	$smarty = new Smarty();
