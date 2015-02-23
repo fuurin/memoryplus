@@ -2,11 +2,11 @@
 <html>
 {include file='header.html'}
 <body>
-<h1>CSVファイルダウンロード完了</h1>
-<h2>{$file_name}をダウンロードしました。</h2>
-<h3>フォルダを開く</h3>
-<p>以下のURLを検索フォームに張り付けて移動すると、ダウンロードしたフォルダのページに移ります。</p>
-<p>{$path}</p><br/>
+<h1>CSVファイルダウンロード準備完了</h1>
+<h2>{$file_name}を作成しました。</h2>
+<h3>CSVファイルを保存</h3>
+<p>以下のリンクの上で右クリックを押して「名前を付けてリンク先を保存」、をクリックすると、ダウンロードが開始されます。</p>
+<p><a href={$file_path}>ダウンロード</a></p><br/>
 
 <a href="select.php?subject={$subject}&workbook={$workbook}">
 	←問題選択に戻る

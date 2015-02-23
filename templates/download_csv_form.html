@@ -23,21 +23,18 @@
 <h3>※CSVファイルに関する注意</h3>
 
 <p>・｜教科名｜問題集名｜問題｜解答｜覚え方｜をダウンロードします。</p>
-<p>・存在するフォルダのパスを入力してからダウンロードしてください。</p>
 <p>・1行目には見出しが入力されます。</p>
+<p>・以下の「ダウンロード」ボタンを押すと、新しいファイルが生成され、ダウンロードの準備ができます。</p>
+<p>・1つのユーザは、サーバに1つのファイルしか保存できないようにしています。</p>
+<p>・「ダウンロード」ボタンを押すと、あなたが今まで作成したファイルが削除されます。</p>
 
 <br/>
 <form action="download_csv.php" method="post">
-	<p>↓ダウンロードするフォルダの絶対パス</p>
-	<input type="text" name="path" {if isset($path)}value="{$path}"{/if}>
 	<input type="hidden" name="subject" value="{$subject}" />
 	<input type="hidden" name="workbook" value="{$workbook}" />
 	<input type="submit" name="download" value="ダウンロード">
 </form>
-{if isset($path)}<p class="error">　→存在するフォルダを入力してください。</p>
-{else}
 <br/>
-{/if}
 
 <h3>選択された問題</h3>
 

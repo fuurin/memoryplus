@@ -4,9 +4,7 @@
 	//教科名を割り当て
 	$subject = $_GET['subject'];
 	$workbook = $_GET['workbook'];
-	$smarty->assign('subject', $subject);
-	$smarty->assign('workbook', $workbook);
-	
+	$file_path = $_GET['path'];
 	
 	if($_SESSION['q_array']===array())
 	{

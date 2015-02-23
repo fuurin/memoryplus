@@ -4,26 +4,23 @@
 	//データ受け取り
 	$subject=$_POST['subject'];
 	$workbook=$_POST['workbook'];
-	$path=$_POST['path'];
-
-	//パスを修正
-	$path = str_replace("\\", "/", $path);
 
 	//受け取ったデータをアサイン
 	$smarty->assign('subject', $subject);
 	$smarty->assign('workbook', $workbook);
-	$smarty->assign('path', $path);
 
-	//入力内容チェック、存在するフォルダかどうか調べる
-	if(!file_exists($path) || !is_dir($path))
+	//パスを作成
+	$path = "questions";
+
+	$dir = opendir($path);
+
+	while(false !== ($file = readdir($dir)))
 	{
-		//帰らせる
-		header("location: download_csv_form.php?subject=" 
-			. $subject . "&workbook=" . $workbook . "&path=" . $path);
-		exit();
+		if(preg_match("/^".$user_name."_/", $file))
+	  	{
+	    	unlink($path . "/" . $file);
+		}
 	}
-
-
 
 	//ファイルの前半の名前を作成
 	$name = $user_name . "_" . $subject . "_" . $workbook . "_";
@@ -38,6 +35,8 @@
 
 	//ファイルパスを作成
 	$file_path = $path . "/" . $file_name;
+
+	$smarty->assign('file_path', $file_path);
 
 	//Shift-JISにファイル名をエンコード（Windows用）
 	$file_path = mb_convert_encoding($file_path, "SJIS"); 
