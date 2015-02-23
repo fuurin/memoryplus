@@ -36,10 +36,6 @@
 	//ファイルパスを作成
 	$file_path = $path . "/" . $file_name;
 
-	//Shift-JISにファイル名をエンコード（Windows用）
-	$file_path = mb_convert_encoding($file_path, "SJIS"); 
-
-	//Shift-Jisのファイルパスを渡す
 	$smarty->assign('file_path', $file_path);
 
 	//ファイルオープンで作成
@@ -54,16 +50,13 @@
 	try
 	{
 		//CSVファイルに見出しを書き込む 
-		$title_subject=mb_convert_encoding("教科名", "SJIS");
-		$title_workbook=mb_convert_encoding("問題集名", "SJIS");
-		$title_question=mb_convert_encoding("問題", "SJIS");
-		$title_answer=mb_convert_encoding("解答", "SJIS");
-		$title_memory=mb_convert_encoding("覚え方", "SJIS");
+		$title_subject="教科名";
+		$title_workbook="問題集名";
+		$title_question="問題";
+		$title_answer="解答";
+		$title_memory="覚え方";
 		fputcsv($fp, array($title_subject, $title_workbook, 
 			$title_question, $title_answer, $title_memory) );
-
-		//Shift-JISでデータを受け取る
-		$pdo->query('SET NAMES sjis');
 
 		//一問ずつCSVファイルに保存
 		for ($i=0; isset($_SESSION['q_array'][$i]); $i++) 
@@ -89,9 +82,6 @@
 			fputcsv($fp, array($data['subject'], $data['workbook'], 
 				$data['question'], $data['answer'], $data['memory']) );
 		}
-
-		//文字コードを元に戻す
-		$pdo->query('SET NAMES utf8');
 	}
 	catch(PDOException $e)
 	{
