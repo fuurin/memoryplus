@@ -36,10 +36,11 @@
 	//ファイルパスを作成
 	$file_path = $path . "/" . $file_name;
 
-	$smarty->assign('file_path', $file_path);
-
 	//Shift-JISにファイル名をエンコード（Windows用）
 	$file_path = mb_convert_encoding($file_path, "SJIS"); 
+
+	//Shift-Jisのファイルパスを渡す
+	$smarty->assign('file_path', $file_path);
 
 	//ファイルオープンで作成
 	$fp = fopen($file_path, "w");
