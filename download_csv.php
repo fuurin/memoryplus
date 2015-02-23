@@ -11,6 +11,7 @@
 
 	//パスを作成
 	$path = "questions";
+	$path = mb_convert_encoding($path, "SJIS"); 
 
 	$dir = opendir($path);
 
